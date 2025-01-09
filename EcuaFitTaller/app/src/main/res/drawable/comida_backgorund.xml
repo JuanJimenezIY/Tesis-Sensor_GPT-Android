@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:top="0dp"
+        android:bottom="50dp"
+        android:left="0dp"
+        android:right="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/principal_color_ej" /> <!-- Primer color (rojo en este ejemplo) -->
+        </shape>
+    </item>
+
+    <!-- Capa superior con el segundo color -->
+    <item
+        android:top="225dp"
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white" /> <!-- Segundo color (verde en este ejemplo) -->
+        </shape>
+    </item>
+</layer-list>

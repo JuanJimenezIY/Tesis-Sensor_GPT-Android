@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="tamanio">60dp</dimen>
+    <dimen name="margen">42dp</dimen>
+    <dimen name="width">42dp</dimen>
+    <dimen name="btn_height">40</dimen>
+    <dimen name="btn_widht">40</dimen>
+</resources>

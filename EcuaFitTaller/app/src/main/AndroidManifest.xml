@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE"/>
+    <uses-permission android:name="android.permission.health.WRITE_HEART_RATE"/>
+    <uses-permission android:name="android.permission.health.READ_STEPS"/>
+    <uses-permission android:name="android.permission.health.WRITE_STEPS"/>
+    <uses-permission android:name="android.permission.health.READ_EXERCISE"/>
+    <uses-permission android:name="android.permission.health.WRITE_EXERCISE"/>
+    <uses-permission android:name="android.permission.health.READ_TOTAL_CALORIES_BURNED"/>
+    <uses-permission android:name="android.permission.health.WRITE_TOTAL_CALORIES_BURNED"/>
+    <uses-permission android:name="android.permission.health.READ_WEIGHT"/>
+    <uses-permission android:name="android.permission.health.WRITE_WEIGHT"/>
+
+
+
+    <application
+
+        android:name=".ui.utilities.EcuaFit"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EcuaFit"
+        tools:targetApi="31">
+        <receiver android:name=".ui.utilities.BroadcasterNotifications"
+            android:enabled="true"
+
+            ></receiver>
+
+        <service
+            android:name=".ui.utilities.ServiceReminder"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".ui.utilities.StepListenerService" android:exported="true" />
+
+
+        <activity
+            android:name=".ui.activities.PremiumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.ComidaDiariaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.EjerciciosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.AguaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.PesoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.DetailsComidasItems"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.RegistroActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activities.MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- TODO: Add intent filter to handle permission rationale intent -->
+            <!-- Permission handling for Android 13 and before -->
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+
+            <!-- Permission handling for Android 14 and later -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE"/>
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS"/>
+            </intent-filter>
+
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts"
+            />
+        <meta-data
+            android:name="androidx.health.CONNECT_CLIENT"
+            android:value="true" />
+
+    </application>
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
+
+</manifest>

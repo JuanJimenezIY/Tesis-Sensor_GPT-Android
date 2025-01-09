@@ -1,0 +1,112 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.EcuaFit" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/color_boton</item>
+
+        <item name="colorPrimary">@color/color_complementario</item>
+
+
+
+    </style>
+
+    <style name="Theme.EcuaFit" parent="Base.Theme.EcuaFit" />
+    <style name="textTitle" >
+
+
+        <item name="android:textColor">@color/color_boton</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="loginTextTitle" >
+
+
+        <item name="android:textColor">@color/color_boton</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="textSubTitle" >
+
+
+        <item name="android:textColor">@color/font_color_ej</item>
+        <item name="android:textSize">17sp</item>
+
+    </style>
+    <style name="text" >
+
+
+        <item name="android:textColor">@color/font_color_ej</item>
+        <item name="android:textSize">15sp</item>
+
+    </style>
+    <style name="button" >
+
+
+        <item name="android:textColor">@color/button_font_color_ej</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+
+
+    </style>
+    <style name="hintText" >
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">#F78F8F8F</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+    <style name="socialText" >
+        <item name="android:textColor">@color/button_font_color_ej</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+    <style name="activeIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/selector_color</item>
+
+    </style>
+
+    <style name="titulos" >
+
+
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="details" >
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="paddingStart">10dp</item>
+         <item name="fontFamily">@font/font</item>
+
+
+    </style>
+
+    <style name="titulosAyP" >
+        <item name="android:textSize">50sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="subtituloAyP" >
+        <item name="android:textSize">32sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="textoAyP" >
+        <item name="android:textSize">32sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+</resources>

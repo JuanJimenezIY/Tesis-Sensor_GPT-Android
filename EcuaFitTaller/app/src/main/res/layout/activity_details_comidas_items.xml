@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".ui.activities.DetailsComidasItems"
+    android:background="@drawable/comida_backgorund"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        style="@style/titulos"
+        android:id="@+id/tituloDetail"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:textColor="@color/fondo_login"
+        android:text="Información "
+     />
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="20dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imagenComida"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/hornado"
+
+
+            />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <TextView
+        android:id="@+id/nombreComida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hornado"
+        android:textSize="30sp"
+        android:textStyle="bold"
+
+        android:textColor="@color/principal_color_ej"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"/>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="330dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Porcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Porcion"
+                android:textColor="@color/principal_color_ej"
+                android:textSize="20sp"
+
+                />
+
+            <EditText
+               style="@style/details"
+                android:id="@+id/cantidadProcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:paddingStart="5dp"
+                android:text="1"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="number"
+                android:textSize="16sp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calorias"
+
+                android:textColor="@color/principal_color_ej"
+                android:textSize="20sp"
+
+                />
+
+            <TextView
+                android:id="@+id/calorias"
+                style="@style/details"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:text="120 calorias" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Macronutrientes"
+                android:textColor="@color/principal_color_ej"
+                android:textSize="20sp"
+
+                />
+
+            <ListView
+                android:id="@+id/macroList"
+
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="150dp"
+                android:contextClickable="false"
+                android:divider="@color/white"
+                android:textDirection="firstStrongLtr"
+
+                android:textFilterEnabled="false" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="160dp"
+
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Micronutrientes"
+                android:textColor="@color/principal_color_ej"
+                android:textSize="20sp"
+
+                />
+
+            <ListView
+                android:id="@+id/microList"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:divider="@color/white" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Region"
+                android:textColor="@color/principal_color_ej"
+                android:textSize="20sp"
+
+                />
+
+            <TextView
+                android:id="@+id/region"
+                style="@style/details"
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:text="Sierra"
+
+                />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAddComida"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="5dp"
+                android:layout_gravity="right|bottom"
+                android:layout_marginTop="60dp"
+                android:backgroundTint="@color/color_boton"
+                android:tintMode="@color/card_detail"
+                android:src="@drawable/baseline_add_24">
+
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/principal_color_ej"
+    tools:context=".ui.fragments.InicioFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        style="@style/titulos"
+        android:id="@+id/progreso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Progreso"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        app:layout_constraintBottom_toTopOf="@+id/grafico"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/grafico"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/card_background"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/caloriasCard"
+        app:layout_constraintTop_toBottomOf="@+id/progreso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <com.anychart.AnyChartView
+                android:id="@+id/any_chart_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/caloriasCard"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="674dp"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/card_background"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grafico">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Calorías consumidas"
+                android:textColor="@color/color_complementario"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/inicioCalsConsu"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+
+                android:textColor="@color/color_complementario"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@id/pesoCard"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:cardBackgroundColor="@color/card_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caloriasCard"
+        android:orientation="horizontal"
+        app:cardCornerRadius="15dp"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/color_complementario"
+                android:text="Peso "
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtPesoInicio"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/color_complementario"
+                android:gravity="center"
+                android:text=""
+                android:textStyle="bold"
+                android:textSize="30sp" />
+            <TextView
+
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+
+                android:textColor="@color/color_complementario"
+                android:gravity="center"
+                android:text="kg"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+<!--este debe ser recycle view-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPremium"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/card_background"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pesoCard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#7CACAC"
+
+            >
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+
+
+
+                android:gravity="center"
+                android:text="Asesoria Premium"
+                android:textColor="@color/color_complementario"
+                android:textSize="25sp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+
+                android:src="@drawable/premium"
+                android:layout_gravity="center"
+
+                >
+
+            </ImageView>
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

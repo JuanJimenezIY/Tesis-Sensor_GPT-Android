@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_login"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- TextView para el título de la página -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="800dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/registro"
+                style="@style/titulos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="32dp"
+                android:text="Registro de Usuario"
+                android:textColor="@color/principal_color_ej" />
+
+            <TextView
+                style="@style/loginTextTitle"
+                android:id="@+id/textViewNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre:"
+                android:textColor="@color/color_complementario"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu nombre" />
+
+            <TextView
+                style="@style/loginTextTitle"
+                android:id="@+id/textViewEmailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Correo Electrónico:"
+                android:textColor="@color/color_complementario"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu correo electrónico"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                style="@style/loginTextTitle"
+                android:id="@+id/textViewPasswordLabel2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Género:"
+                android:textColor="@color/color_complementario"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextGenero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masculino o Femenino"
+                android:inputType="text" />
+
+            <TextView
+                style="@style/loginTextTitle"
+                android:id="@+id/textViewPasswordLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Edad:"
+                android:textColor="@color/color_complementario"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextEdad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu edad"
+                android:inputType="number" />
+
+            <TextView
+                style="@style/loginTextTitle"
+                android:id="@+id/textViewPasswordLabel5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Peso (kg):"
+                android:textColor="@color/color_complementario"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu peso"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/textViewPasswordLabel3"
+                style="@style/loginTextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Altura (cm):"
+                android:textColor="@color/color_complementario"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextAltura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu altura"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                style="@style/loginTextTitle"
+                android:id="@+id/textViewPasswordLabel6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Contraseña:"
+                android:textColor="@color/color_complementario"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu contraseña"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/buttonRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+
+                android:backgroundTint="@color/principal_color_ej"
+                android:text="Registrar" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+    <!-- TextView y EditText para el nombre -->
+
+    <!-- TextView y EditText para el correo electrónico -->
+
+    <!-- TextView y EditText para la contraseña -->
+
+</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

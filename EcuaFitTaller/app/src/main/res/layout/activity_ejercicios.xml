@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/principal_color_ej"
+    tools:context=".ui.activities.EjerciciosActivity">
+
+
+    <ImageView
+        android:id="@+id/pesa"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/pesa"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/titulos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:layout_marginTop="4dp"
+        android:text="Ejercicios"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pesa" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchEjercicios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+       android:layout_marginVertical="20dp"
+        android:background="@drawable/searchview_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/textView4">
+
+    </androidx.appcompat.widget.SearchView>
+
+
+    <LinearLayout
+        android:id="@+id/lyEjercicioCopia"
+
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchEjercicios"
+
+
+
+        >
+
+        <include layout="@layout/shimmer_layout_ejercicio"></include>
+
+        <include layout="@layout/shimmer_layout_ejercicio"></include>
+
+
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEjercicios"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchEjercicios"
+        app:layout_constraintVertical_bias="0.1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">EcuaFit</string>
+
+    <string name="name_banner">EcuaFit App</string>
+    <string name="menu_inicio">Inicio</string>
+    <string name="menu_informe">Informes</string>
+    <string name="menu_diario">Diario</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Personajes Marvel</string>
+
+
+    <string name="second_fragment">Segundo Fragment</string>
+    <string name="titulo_second_fragment">Busqueda Marvel</string>
+    <string name="third_fragment">Favoritos</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="enabled">true</string>
+
+    <!--Agua y Peso-->
+    <string name="agua">Registro de agua</string>
+    <string name="vasos">Vasos de agua:</string>
+    <string name="peso">Peso</string>
+</resources>

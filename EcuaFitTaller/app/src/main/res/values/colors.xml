@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="background_ej">#FFFFFF</color>
+    <color name="title_color_ej">#F7000000</color>
+    <color name="font_color_ej">#F7979191</color>
+    <color name="principal_color_ej">#73CFC9</color>
+    <color name="color_secundario">#E0E0E0</color>
+    <color name="color_complementario">#2A2E33</color>
+    <color name="color_boton">#219787</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="selector_color">#C4ECE2</color>
+
+    <color name="button_font_color_ej">#FFFFFF</color>
+    <color name="hint_text">#F71F1F1F</color>
+    <color name="fondo_login">#FFFFFF</color>
+
+    <color name="card_detail"> #C4F4F4F4</color>
+
+
+</resources>
