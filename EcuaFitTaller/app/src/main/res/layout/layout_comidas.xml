@@ -38,7 +38,7 @@
                 android:gravity="left|center"
                 android:text="Hornado"
                 android:textStyle="bold"
-                android:textColor="@color/color_complementario"
+
                 android:textSize="18sp" />
 
             <TextView
@@ -48,7 +48,7 @@
                 android:gravity="left|center"
 
                 android:text="Porción: 1"
-                android:textColor="@color/color_complementario"
+
                 android:textSize="18sp" />
             </LinearLayout>
             <TextView
@@ -58,7 +58,7 @@
 
                 android:gravity="left|center"
                 android:text="888 kcal"
-                android:textColor="@color/color_complementario"
+
                 android:textSize="18sp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton

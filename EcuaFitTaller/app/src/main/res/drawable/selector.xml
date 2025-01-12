@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:color="@color/color_boton" android:state_checked="true"/>
+    <item android:color="@color/relleno_menu" android:state_checked="true"/>
 
-    <item android:color="@color/color_complementario"/>
+    <item android:color="@color/icono_menu"/>
 
 </selector>

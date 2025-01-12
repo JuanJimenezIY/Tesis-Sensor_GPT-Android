@@ -392,7 +392,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="24dp"
         android:clickable="true"
-        app:cardBackgroundColor="@color/card_background"
+
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.525"
@@ -409,7 +409,7 @@
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/color_complementario"
+
                 android:text="Ejercicios"
                 android:textSize="30dp">
 
@@ -431,7 +431,7 @@
         android:layout_height="75dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        app:cardBackgroundColor="@color/card_background"
+
         android:clickable="true"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -450,7 +450,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/peso"
-                android:textColor="@color/color_complementario"
+
                 android:textSize="30dp">
 
             </TextView>

@@ -1,13 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.EcuaFit" parent="Theme.Material3.DayNight.NoActionBar">
+
+    <style name="Base.Theme.EcuaFit" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/color_boton</item>
 
         <item name="colorPrimary">@color/color_complementario</item>
 
+        <item name="android:textViewStyle">@style/CustomTextView</item>
 
+        <item name="cardViewStyle">@style/CustomCardView</item>
 
     </style>
 
@@ -20,7 +23,15 @@
         <item name="android:textStyle">bold</item>
 
     </style>
+    <style name="CustomTextView" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/color_complementario</item>
 
+    </style>
+
+    <style name="CustomCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/card_background</item>
+
+    </style>
     <style name="loginTextTitle" >
 
 
@@ -67,7 +78,7 @@
     </style>
     <style name="activeIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/selector_color</item>
-
+        <item name="android:backgroundTint">@color/background_ej</item>
     </style>
 
     <style name="titulos" >
@@ -82,7 +93,7 @@
     </style>
 
     <style name="details" >
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/title_color_ej</item>
         <item name="android:textSize">16sp</item>
         <item name="paddingStart">10dp</item>
          <item name="fontFamily">@font/font</item>

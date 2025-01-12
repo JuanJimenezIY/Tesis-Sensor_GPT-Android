@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background_ej">#000000</color>
+    <color name="icono_menu">#525252</color>
+    <color name="principal_color_ej">#305957</color>
+    <color name="card_background">#0F0F0F</color>
+    <color name="title_color_ej">#F7D1D1D1</color>
+    <color name="relleno_menu">#BCBCBC</color>
+
+    <color name="card_special">#246862</color>
+</resources>

@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
 
     <item
         android:id="@+id/inicio"
         android:icon="@drawable/pagina_principal_48"
         android:title="@string/menu_inicio"
         android:enabled="true"
-        android:visible="true"/>
+        android:visible="true"
+
+        />
     <item
         android:id="@+id/diario"
         android:icon="@drawable/group_layouts_32"
         android:title="@string/menu_diario"
         android:enabled="true"
+
         />
     <item
         android:id="@+id/informe"

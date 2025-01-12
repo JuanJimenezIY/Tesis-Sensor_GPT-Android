@@ -26,6 +26,7 @@
 
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/grafico"
         android:layout_width="match_parent"
         android:layout_height="220dp"
@@ -65,7 +66,7 @@
         android:layout_margin="10dp"
         android:layout_marginTop="674dp"
         android:orientation="horizontal"
-        app:cardBackgroundColor="@color/card_background"
+
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +82,6 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Calorías consumidas"
-                android:textColor="@color/color_complementario"
 
                 android:textSize="20sp" />
 
@@ -92,7 +92,7 @@
                 android:layout_marginStart="10dp"
                 android:gravity="center"
 
-                android:textColor="@color/color_complementario"
+
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
         android:id="@id/pesoCard"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        app:cardBackgroundColor="@color/card_background"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/caloriasCard"
         android:orientation="horizontal"
@@ -120,7 +120,7 @@
                 android:layout_width="175dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/color_complementario"
+
                 android:text="Peso "
                 android:textSize="20sp" />
 
@@ -129,7 +129,7 @@
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
-                android:textColor="@color/color_complementario"
+
                 android:gravity="center"
                 android:text=""
                 android:textStyle="bold"
@@ -139,7 +139,7 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
 
-                android:textColor="@color/color_complementario"
+
                 android:gravity="center"
                 android:text="kg"
                 android:textStyle="bold"
@@ -165,7 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:background="#7CACAC"
+            android:background="@color/card_special"
 
             >
 
