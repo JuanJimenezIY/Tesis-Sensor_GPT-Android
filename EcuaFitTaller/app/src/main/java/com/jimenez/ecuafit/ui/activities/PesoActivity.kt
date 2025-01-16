@@ -48,6 +48,7 @@ class PesoActivity : AppCompatActivity() {
 
 
     }
+    //acutalizar que el peso ingresado se ingrese en la bsae de datos
     @SuppressLint("SuspiciousIndentation")
     suspend fun actualizarPeso() {
         val nuevoPeso=binding.peso.text.toString()

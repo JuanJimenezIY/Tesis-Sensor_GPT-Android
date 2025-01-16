@@ -25,7 +25,7 @@
         app:itemActiveIndicatorStyle="@style/activeIndicator"
         app:itemRippleColor="@color/color_boton"
         android:background="@color/background_ej"
-
+        android:outlineAmbientShadowColor="#666666"
         app:itemTextColor="@drawable/selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

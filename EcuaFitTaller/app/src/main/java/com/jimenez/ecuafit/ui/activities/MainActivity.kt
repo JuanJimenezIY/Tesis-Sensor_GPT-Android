@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         sharedPref = getSharedPreferences("sesion", Context.MODE_PRIVATE)
 
+
         val permissions = setOf(
             HealthPermissions.READ_STEPS,
             HealthPermissions.READ_HEART_RATE,

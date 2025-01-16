@@ -18,85 +18,20 @@
 
         android:layout_marginTop="68dp"
 
-        android:text="@string/agua"
+        android:text="@string/salud"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/totalAgua"
+        android:id="@+id/ritmoCardiaco"
+        android:layout_marginTop="350px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_marginTop="36dp"
-
-        android:text="0 ml"
-        android:theme="@style/subtituloAyP"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-
-        android:layout_marginTop="125dp"
-
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalAgua"
-        app:srcCompat="@drawable/awa" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/boton_mas"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginStart="50dp"
-        android:backgroundTint="@color/principal_color_ej"
-        android:src="@drawable/baseline_add_24"
-        android:tintMode="@color/color_complementario"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@id/totalAgua">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/boton_menos"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/principal_color_ej"
-        android:src="@drawable/menos"
-        android:tintMode="@color/color_complementario"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@id/totalAgua">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="50dp"
-        android:text="@string/vasos"
         android:theme="@style/textoAyP"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <TextView
-        android:id="@+id/totalVasos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="0"
-        android:theme="@style/textoAyP"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+     ></TextView>
+
 
     <TextView
         android:id="@+id/pasos"
@@ -104,73 +39,64 @@
         android:layout_height="wrap_content"
         android:theme="@style/textoAyP"
 
-        app:layout_constraintBottom_toTopOf="@id/progressBar"
+        app:layout_constraintTop_toBottomOf="@id/ritmoCardiaco"
 
-        app:layout_constraintTop_toBottomOf="@+id/totalVasos"></TextView>
-    <TextView
-        android:theme="@style/textoAyP"
-        android:id="@+id/ritmoCardiaco"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/totalVasos"
-        app:layout_constraintBottom_toTopOf="@id/pasos"
         ></TextView>
 
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-
         android:layout_width="600px"
 
-        android:layout_height="wrap_content"
+        android:layout_height="100px"
         android:layout_marginBottom="10px"
         android:max="8000"
         android:progress="0"
-        android:progressTint="@color/principal_color_ej"
-        app:layout_constraintBottom_toBottomOf="@+id/duracionSueno"
+        android:progressTint="@color/progress_bar"
+
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pasos" />
-    <!-- Define un valor máximo de pasos -->
 
-    />
+
+
 
     <TextView
         android:id="@+id/pasosP"
         android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100px"
 android:text="20w"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/pasos"
+
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toEndOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@id/duracionSueno"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/pasos"></TextView>
 
     <ImageView
 
         android:layout_width="100px"
-        android:layout_height="1000px"
-        android:text="20w"
-        app:srcCompat="@drawable/pasos"
-        app:layout_constraintBottom_toBottomOf="@+id/pasos"
+        android:layout_height="100px"
 
-        app:layout_constraintTop_toTopOf="@id/duracionSueno"
+        app:srcCompat="@drawable/pasos"
+
+
+        app:layout_constraintTop_toBottomOf="@id/pasos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/progressBar"
     ></ImageView>
+
     <TextView
         android:id="@+id/duracionSueno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Última sesión: 0 horas"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar"/>
+        app:layout_constraintTop_toBottomOf="@id/progressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

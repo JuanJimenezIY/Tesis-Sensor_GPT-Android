@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/card_background"
+        android:backgroundTint="@color/comidas_background"
 
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

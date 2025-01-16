@@ -101,21 +101,39 @@ class InicioFragment : Fragment() {
         Log.d("UCE", peso.toString())
         val data: MutableList<DataEntry> = ArrayList()
         val maxVisible = 10
-        if (peso != null) {
+
+        // Asegurarse de que siempre haya al menos dos puntos de datos
+        if (peso != null && peso!!.isNotEmpty()) {
+            data.add(ValueDataEntry(0, 0.0)) // Agregar un punto de datos con peso 0
+
             peso!!.takeLast(maxVisible).forEachIndexed { i, u ->
-                data.add(ValueDataEntry(i, u.toDouble()))
+                data.add(ValueDataEntry(i + 1, u.toDouble())) // Asegurar que los índices comiencen en 1
             }
 
+            line.data(data)
+            binding.anyChartView.setChart(line)
+
+            // Mostrar la diferencia de peso
             if (peso!!.size >= 2) {
-                line.data(data)
-                binding.anyChartView.setChart(line)
-                binding.txtPesoInicio.text =
-                    (peso!!.last().toDouble() - peso!![peso!!.size - 2].toDouble()).toString()
+                val diferencia = peso!!.last().toDouble() - peso!![peso!!.size - 2].toDouble()
+                val diferenciaTexto = if (diferencia >= 0) "+$diferencia" else diferencia.toString()
+                binding.txtPesoInicio.text = diferenciaTexto
+            } else {
+                binding.txtPesoInicio.text = peso!!.lastOrNull()?.toDouble()?.toString() ?: "0.0"
             }
+        } else {
+            // Caso cuando no hay datos en peso
+            data.add(ValueDataEntry(0, 0.0))
+            data.add(ValueDataEntry(1, 0.0))
+            line.data(data)
+            binding.anyChartView.setChart(line)
+            binding.txtPesoInicio.text = "0.0"
         }
+
         val localDateTime = LocalDateTime.now()
         val instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant()
         val date = Date.from(instant)
+
         var task = lifecycleScope.launch(Dispatchers.Main) {
             comidaItems = withContext(Dispatchers.IO) {
                 return@withContext ComidaLogicDB().getAllComidaByFecha(date)
@@ -128,11 +146,5 @@ class InicioFragment : Fragment() {
         }
     }
 
-    fun calcular(all: UsuarioDB): Double {
-        var sum = 0.0
-        all.peso.forEach {
-            sum += it.toDouble()
-        }
-        return sum
-    }
+
 }

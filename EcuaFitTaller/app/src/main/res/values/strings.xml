@@ -16,7 +16,7 @@
     <string name="enabled">true</string>
 
     <!--Agua y Peso-->
-    <string name="agua">Registro de agua</string>
+    <string name="salud">Salud</string>
     <string name="vasos">Vasos de agua:</string>
     <string name="peso">Peso</string>
 </resources>

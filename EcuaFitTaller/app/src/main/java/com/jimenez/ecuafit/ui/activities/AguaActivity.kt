@@ -45,8 +45,7 @@ import kotlinx.coroutines.launch
 class AguaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAguaBinding
-    private var agua = 0
-    private var vaso = 0
+
 
     companion object {
         const val CHANNEL_ID = "ecuafit_channel_id"
@@ -58,39 +57,17 @@ class AguaActivity : AppCompatActivity() {
         binding = ActivityAguaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        createNotificationChannel()
 
-        val sharedPref = getSharedPreferences("agua", Context.MODE_PRIVATE)
-        vaso = sharedPref.getInt("agua", agua)
-        Log.d("UCE", vaso.toString())
-        binding.totalAgua.text = (vaso * 250).toString() + " ml"
-        binding.totalVasos.text = "$vaso"
-        binding.botonMas.setOnClickListener { agregarAgua() }
-        binding.botonMenos.setOnClickListener { restarAgua() }
 
-        if (vaso < 8) {
-            scheduleNotification(100)
-        } else {
-            cancelScheduledNotification()
-        }
-        scheduleMidnightJob()
+
+
+
 
         obtenerPasosYRitmoCardiaco()
         obtenerDuracionSueno()
 
     }
 
-    fun agregarAgua() {
-        vaso += 1
-        actualizarAgua()
-    }
-
-    fun restarAgua() {
-        if (vaso >= 1) {
-            vaso -= 1
-        }
-        actualizarAgua()
-    }
 
     private fun obtenerPasosYRitmoCardiaco() {
         lifecycleScope.launch(Dispatchers.Main) {
@@ -99,8 +76,6 @@ class AguaActivity : AppCompatActivity() {
             setProgressBarWithAnimation(binding.progressBar, totalSteps.toInt()) // Actualizar la barra de progreso con animación
             binding.pasosP.text = "${(totalSteps.toDouble() / binding.progressBar.max * 100).toInt()}%"
 
-            // Mostrar notificación de éxito si se alcanzan los 8000 pasos
-            mostrarNotificacionExito(totalSteps)
 
             val heartRate = readLastHeartRate()
             binding.ritmoCardiaco.text = "Ritmo Cardíaco: $heartRate bpm"
@@ -108,11 +83,12 @@ class AguaActivity : AppCompatActivity() {
     }
     private fun obtenerDuracionSueno() {
         lifecycleScope.launch(Dispatchers.Main) {
-            val duracionSueno = readLastSleepDuration()
-            binding.duracionSueno.text = "Duración del Sueño: $duracionSueno horas"
+            val (horas, minutos) = readLastSleepDuration()
+            binding.duracionSueno.text = "Duración del Sueño: $horas horas y $minutos minutos"
         }
     }
-    private suspend fun readLastSleepDuration(): Double = withContext(Dispatchers.IO) {
+
+    private suspend fun readLastSleepDuration(): Pair<Int, Int> = withContext(Dispatchers.IO) {
         try {
             val healthConnectClient = HealthConnectClient.getOrCreate(this@AguaActivity)
             val response = healthConnectClient.readRecords(
@@ -122,17 +98,20 @@ class AguaActivity : AppCompatActivity() {
                 )
             )
             val lastSleepSession = response.records.maxByOrNull { it.endTime }
-            val durationInHours = lastSleepSession?.let {
-                val durationInMillis = it.endTime.toEpochMilli() - it.startTime.toEpochMilli()
-                durationInMillis / (1000 * 60 * 60).toDouble()
-            } ?: 0.0
-            Log.d("HealthConnect", "Duración del Sueño obtenida: $durationInHours horas")
-            durationInHours
+            val durationInMillis = lastSleepSession?.let {
+                it.endTime.toEpochMilli() - it.startTime.toEpochMilli()
+            } ?: 0L
+            val durationInHours = (durationInMillis / (1000 * 60 * 60)).toInt()
+            val durationInMinutes = ((durationInMillis / (1000 * 60)) % 60).toInt()
+
+            Log.d("HealthConnect", "Duración del Sueño obtenida: $durationInHours horas y $durationInMinutes minutos")
+            durationInHours to durationInMinutes
         } catch (e: Exception) {
             Log.e("HealthConnect", "Error al leer la duración del sueño: ${e.message}", e)
-            0.0
+            0 to 0
         }
     }
+
     private suspend fun readTotalSteps(): Long = withContext(Dispatchers.IO) {
         try {
             val healthConnectClient = HealthConnectClient.getOrCreate(this@AguaActivity)
@@ -158,15 +137,11 @@ class AguaActivity : AppCompatActivity() {
             val response = healthConnectClient.readRecords(
                 ReadRecordsRequest(
                     HeartRateRecord::class,
-                    timeRangeFilter = TimeRangeFilter.before(Instant.now()) // Todos los ritmos cardíacos hasta el momento actual
+                    timeRangeFilter = TimeRangeFilter.before(Instant.now())
                 )
             )
-            val heartRates = response.records.map { it.samples }.flatten()
-            val lastHeartRate = if (heartRates.isNotEmpty()) {
-                heartRates.last().beatsPerMinute
-            } else {
-                0.0
-            }
+            val heartRates = response.records.flatMap { it.samples }
+            val lastHeartRate = heartRates.lastOrNull()?.beatsPerMinute ?: 0.0
             Log.d("HealthConnect", "Último Ritmo Cardíaco obtenido: $lastHeartRate bpm")
             lastHeartRate
         } catch (e: Exception) {
@@ -177,92 +152,12 @@ class AguaActivity : AppCompatActivity() {
 
     private fun setProgressBarWithAnimation(progressBar: ProgressBar, progressTo: Int) {
         val animation = ObjectAnimator.ofInt(progressBar, "progress", progressBar.progress, progressTo)
-        animation.duration = 500 // Duración de la animación en milisegundos
+        animation.duration = 5000 // Duración de la animación en milisegundos
         animation.interpolator = DecelerateInterpolator()
         animation.start()
     }
 
-    private fun mostrarNotificacionExito(pasos: Long) {
-        if (pasos >= 8000) {
-            val intent = Intent(this, AguaActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-            val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
-            val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.fitnes_logo) // Cambia esto por el ícono de tu aplicación
-                .setContentTitle("¡Éxito!")
-                .setContentText("Has alcanzado los 8000 pasos. ¡Sigue así!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-
-
-        }
-    }
-
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Ecuafit"
-            val descriptionText = "Notificaciones de Ecuafit"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    private fun actualizarAgua() {
-        binding.totalAgua.text = (vaso * 250).toString() + " ml"
-        binding.totalVasos.text = "$vaso"
-        val sharedPref = getSharedPreferences("agua", Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putInt("agua", vaso).apply()
-        }
-    }
-
-    private fun scheduleNotification(intervalMillis: Long) {
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val notificationIntent = Intent(this, BroadcasterNotifications::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            this, 0, notificationIntent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val currentTime = System.currentTimeMillis()
-        val triggerTime = currentTime + intervalMillis
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            triggerTime,
-            intervalMillis,
-            pendingIntent
-        )
-    }
-
-    private fun scheduleMidnightJob() {
-        val componentName = ComponentName(this, ServiceReminder::class.java)
-        val jobInfo = JobInfo.Builder(1, componentName)
-            .setRequiresDeviceIdle(false)
-            .setRequiresCharging(false)
-            .setPeriodic(AlarmManager.INTERVAL_DAY) // Repetir cada día
-            .build()
-        val jobScheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-        jobScheduler.schedule(jobInfo)
-    }
-
-    private fun cancelScheduledNotification() {
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val notificationIntent = Intent(this, BroadcasterNotifications::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            this, 0, notificationIntent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        alarmManager.cancel(pendingIntent)
-    }
-
-    // Clase interna para recibir las actualizaciones de pasos
 
 
     inner class StepUpdateReceiver : BroadcastReceiver() {

@@ -3,7 +3,7 @@
     <style name="Base.Theme.EcuaFit" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:statusBarColor">#0D3E37</item>
+        <item name="android:statusBarColor">#000000</item>
 
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryDark">@color/black</item>
@@ -29,7 +29,7 @@
 
     </style>
     <style name="CustomCardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@color/black</item>
+        <item name="cardBackgroundColor">@color/card_background</item>
 
     </style>
 
