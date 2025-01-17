@@ -6,97 +6,112 @@
     android:layout_height="match_parent"
     android:background="@drawable/comida_backgorund"
     tools:context=".ui.activities.AguaActivity">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="ExtraText">
-    <TextView
-        android:id="@+id/textView3"
-        style="@style/titulos"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent">
 
-        android:layout_marginTop="68dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="ExtraText">
 
-        android:text="@string/salud"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/titulos"
 
-    <TextView
-        android:id="@+id/ritmoCardiaco"
-        android:layout_marginTop="350px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/textoAyP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                android:text="@string/salud"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        app:layout_constraintTop_toBottomOf="@id/textView3"
-     ></TextView>
+            <TextView
+                android:id="@+id/ritmoCardiaco"
+                android:layout_marginTop="350px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/textoAyP"
+                app:layout_constraintTop_toBottomOf="@id/textView3" />
+
+            <TextView
+                android:id="@+id/pasos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/textoAyP"
+                app:layout_constraintTop_toBottomOf="@id/ritmoCardiaco" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="600px"
+                android:layout_height="100px"
+                android:layout_marginBottom="10px"
+                android:max="8000"
+                android:progress="0"
+                android:progressTint="@color/progress_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pasos" />
+
+            <TextView
+                android:id="@+id/pasosP"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="100px"
+                android:text="20w"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/progressBar"
+                app:layout_constraintTop_toBottomOf="@id/pasos" />
+
+            <ImageView
+                android:layout_width="100px"
+                android:layout_height="100px"
+                app:srcCompat="@drawable/pasos"
+                app:layout_constraintTop_toBottomOf="@id/pasos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/progressBar" />
+
+            <TextView
+                android:id="@+id/duracionSueno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Última sesión: 0 horas"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressBar" />
+            <TextView
+
+                android:id="@+id/openAI"
+                android:text="Informe"
+                android:layout_marginHorizontal="100px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20px"
+                app:layout_constraintTop_toBottomOf="@id/generar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="#77000000"
 
 
-    <TextView
-        android:id="@+id/pasos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/textoAyP"
+                ></TextView>
+            <Button
+                android:id="@+id/generar"
+                style="@style/button"
+                android:backgroundTint="@color/color_boton"
+                android:text="Generacion IA"
+                android:layout_marginHorizontal="150px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@id/ritmoCardiaco"
-
-        ></TextView>
-
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="600px"
-
-        android:layout_height="100px"
-        android:layout_marginBottom="10px"
-        android:max="8000"
-        android:progress="0"
-        android:progressTint="@color/progress_bar"
-
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pasos" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/duracionSueno"
+                app:layout_constraintBottom_toTopOf="@id/generar"
 
 
-
-
-    <TextView
-        android:id="@+id/pasosP"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="100px"
-android:text="20w"
-        android:textColor="@color/black"
-
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toEndOf="@+id/progressBar"
-        app:layout_constraintTop_toBottomOf="@id/pasos"></TextView>
-
-    <ImageView
-
-        android:layout_width="100px"
-        android:layout_height="100px"
-
-        app:srcCompat="@drawable/pasos"
-
-
-        app:layout_constraintTop_toBottomOf="@id/pasos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/progressBar"
-    ></ImageView>
-
-    <TextView
-        android:id="@+id/duracionSueno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Última sesión: 0 horas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+                ></Button>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

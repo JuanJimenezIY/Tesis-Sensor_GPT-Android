@@ -24,5 +24,5 @@
     <color name="card_detail"> #C4F4F4F4</color>
 
     <color name="comidas_background">#FFFFFF</color>
-
+    <color name="color_texto_comida">#73CFC9</color>
 </resources>

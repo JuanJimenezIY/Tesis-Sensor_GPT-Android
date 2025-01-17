@@ -11,8 +11,8 @@
     <color name="color_complementario">#B7CAC8</color>
     <color name="color_boton">#182C31</color>
     <color name="card_special">#1D7167</color>
-    <color name="comidas_background">#005956</color>
+    <color name="comidas_background">#004B45</color>
+    <color name="color_texto_comida">#73CFC9</color>
 
-
-
+    <color name="fondo_login">#1B1B1B</color>
 </resources>

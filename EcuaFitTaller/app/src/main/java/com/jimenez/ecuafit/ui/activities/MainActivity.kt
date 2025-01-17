@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             if (binding.txtName.text.isNotEmpty() && binding.txtPassword.text.isNotEmpty()) {
                 logIn(binding.txtName.text.toString(), binding.txtPassword.text.toString())
             } else {
-                Snackbar.make(binding.txtContraseA, "Ingrese todos los campos", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.txtPassword, "Ingrese todos los campos", Snackbar.LENGTH_SHORT).show()
             }
             binding.btnLogin.isEnabled = true
         }
@@ -138,10 +138,10 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MenuActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Snackbar.make(binding.txtContraseA, "Usuario o contraseña incorrectas", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.txtPassword, "Usuario o contraseña incorrectas", Snackbar.LENGTH_SHORT).show()
                 }
             } else {
-                Snackbar.make(binding.txtContraseA, "Usuario no existe", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.txtPassword, "Usuario no existe", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

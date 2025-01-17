@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondo_login"
+    android:background="@color/background_ej"
     tools:context=".ui.activities.MainActivity">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="28dp"
        android:layout_marginHorizontal="42dp"
-        android:backgroundTint="@color/color_complementario"
+        android:backgroundTint="@color/card_special"
         android:text="Ingresar"
         android:textAllCaps="false"
         app:cornerRadius="10dp"
@@ -43,12 +43,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txt_name1"
         style="@style/hintText"
+        android:layout_marginTop="30px"
         android:layout_width="320dp"
         android:layout_height="@dimen/tamanio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_correo"
-        app:placeholderText="Correo">
+        app:layout_constraintTop_toBottomOf="@+id/txt_subtitulo"
+        app:placeholderText="ejemplo@correo.com"
+
+
+       >
 
         <EditText
             android:id="@+id/txt_name"
@@ -56,21 +60,24 @@
             android:layout_height="match_parent"
             android:hint="Correo"
 
+
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_correo" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_subtitulo" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_toggle"
         style="@style/hintText"
+        android:layout_marginTop="30px"
         android:layout_width="320dp"
         android:layout_height="@dimen/tamanio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_contraseña"
+        app:layout_constraintTop_toBottomOf="@+id/txt_name1"
         app:passwordToggleEnabled="true"
         app:placeholderText="******">
 
@@ -113,31 +120,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_titulo" />
 
-    <TextView
-        android:id="@+id/txt_correo"
-        style="@style/loginTextTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Correo"
-        app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_subtitulo" />
 
-    <TextView
-        android:id="@+id/txt_contraseña"
-        style="@style/loginTextTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Contraseña"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/txt_name1" />
 
 
     <TextView

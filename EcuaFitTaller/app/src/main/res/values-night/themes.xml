@@ -5,9 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="android:statusBarColor">#000000</item>
 
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@color/black</item>
-        <item name="backgroundTint">@color/black</item>
+        <item name="colorPrimary">@color/card_detail</item>
+
+
         <item name="android:secondaryProgress">@color/black</item>
         <item name="cardViewStyle">@style/CustomCardView</item>
         <item name="android:textViewStyle">@style/CustomTextView</item>
@@ -40,5 +40,27 @@
     <style name="customMenuBackground" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/selector_color</item>
 
+    </style>
+
+    <style name="loginTextTitle" >
+
+
+        <item name="android:textColor">@color/card_special</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+    <style name="hintText" >
+
+        <item name="hintTextColor">@color/card_special</item>
+        <item name="android:textColorHint">@color/card_special</item>
+        <item name="hintAnimationEnabled">true
+        </item>
+        <item name="android:labelTextSize">17sp</item>
+
+    </style>
+    <style name="CustomSnackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="backgroundTint">@color/background_ej</item>
+        <item name="android:textColor">@color/card_special</item>
     </style>
 </resources>
