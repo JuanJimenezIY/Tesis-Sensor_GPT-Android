@@ -4,7 +4,7 @@ Ecuafit es una aplicación para la gestión de la nutrición y ejercicio de las 
 
 ## Integrantes
 
-- Antony Arguello
+- Josue Masabanda
 - Juan Jiménez
 
 ## Características
@@ -14,8 +14,6 @@ Ecuafit es una aplicación para la gestión de la nutrición y ejercicio de las 
 - Uso de Fragments para el manejo de ventanas en la aplicación
 
 - Arquitectura MVVM
-
-- Gestion del consumo de agua diaria usando shared preference
 
 - Seguimiento de comidas con sus calorías y macronutrientes diarios obtenidas de base de datos hecha en Firebase
 
@@ -27,15 +25,14 @@ Ecuafit es una aplicación para la gestión de la nutrición y ejercicio de las 
 
 - Asesoría personal con ayuda de Inteligencia Artificial OpenAI ChatGPT, en esta parte de la aplicación se toma un tiempo en responder ya que depende del servicio de chatGPT
 
-- Notificaciones periódicas para recordar tomar agua
-
-- Manejo de vista de carga al cargar imágenes con Shimmer
-
 - Manejo de imágenes con la librería Picasso
 
 - Uso de Room para el manejo de base de datos
 
-- Uso de fecha para guardar comida por días
+- Conección con Health Connect para recibir daros de salud de un reloj inteligente.
+
+- Uso de API OpenAI para dar recomendaciones sobre alimentacion, estilo de vida y ejercicio
+
 ## Librerías
 
 - Retrofit
@@ -49,6 +46,7 @@ Ecuafit es una aplicación para la gestión de la nutrición y ejercicio de las 
 - OpenAI
 - Shimmer
 - Fragment
+- OpenAI
 
 
 ## Capturas de pantalla de la aplicación
