@@ -176,14 +176,14 @@
 
 
                 android:gravity="center"
-                android:text="Asesoria Premium"
+                android:text="Entrenamiento"
                 android:textColor="@color/color_complementario"
                 android:textSize="25sp" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
 
-                android:src="@drawable/premium"
+                android:src="@drawable/ejercicio_icon"
                 android:layout_gravity="center"
 
                 >

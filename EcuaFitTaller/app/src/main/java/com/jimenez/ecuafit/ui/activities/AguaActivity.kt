@@ -54,6 +54,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.health.connect.client.records.BodyFatRecord
+import androidx.health.connect.client.units.Percentage
 import com.google.android.material.snackbar.Snackbar
 import kotlin.time.Duration.Companion.seconds
 
@@ -74,7 +76,9 @@ class AguaActivity : AppCompatActivity() {
 
         FirebaseApp.initializeApp(this)
 
+        binding.openAI.visibility = View.INVISIBLE
         binding.generar.setOnClickListener {
+            binding.openAI.visibility = View.VISIBLE
 
 
             val remoteConfig = FirebaseRemoteConfig.getInstance()
@@ -82,6 +86,8 @@ class AguaActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val valor = remoteConfig.getString("api_key")
+                        Log.d("UCE",  valor)
+
                         openAI = OpenAI(
                             valor, LoggingConfig(), Timeout(socket = 120.seconds)
                         )
@@ -91,6 +97,7 @@ class AguaActivity : AppCompatActivity() {
                             }
                             generaReporte(user)
                         }
+
                     }
                 }
             val configSettings = FirebaseRemoteConfigSettings.Builder()
@@ -99,11 +106,13 @@ class AguaActivity : AppCompatActivity() {
             remoteConfig.setConfigSettingsAsync(configSettings)
         }
 
-        obtenerPasosYRitmoCardiaco()
+        obtenerPasosRitmoYGrasaCorporal()
         obtenerDuracionSueno()
     }
 
-    private fun obtenerPasosYRitmoCardiaco() {
+
+
+    private fun obtenerPasosRitmoYGrasaCorporal() {
         lifecycleScope.launch(Dispatchers.Main) {
             val totalSteps = readTotalSteps()
             binding.pasos.text = "Pasos: $totalSteps / 8000"
@@ -111,14 +120,26 @@ class AguaActivity : AppCompatActivity() {
             binding.pasosP.text = "${(totalSteps.toDouble() / binding.progressBar.max * 100).toInt()}%"
 
             // Mostrar mensaje de felicitaciones si se alcanza la meta
-            if (totalSteps >= 8000) {
+            if (totalSteps >= 5000) {
                 Snackbar.make(binding.root, "¡Felicitaciones! Has alcanzado tu meta de pasos.", Snackbar.LENGTH_LONG).show()
             }
 
             val heartRate = readLastHeartRate()
             binding.ritmoCardiaco.text = "Ritmo Cardíaco: $heartRate bpm"
+
+            val bodyFatPercentage =  readBodyFatPercentage()
+            if (bodyFatPercentage > 0.0) {
+                binding.grasaCorporal.text = "Grasa Corporal: ${"%.1f".format(bodyFatPercentage)}%"
+            } else {
+                binding.grasaCorporal.text = "Grasa Corporal: Sin datos"
+            }
+
+
+
         }
+
     }
+
 
     private fun obtenerDuracionSueno() {
         lifecycleScope.launch(Dispatchers.Main) {
@@ -129,34 +150,70 @@ class AguaActivity : AppCompatActivity() {
 
     @OptIn(BetaOpenAI::class)
     private suspend fun generaReporte(usuarioDB: UsuarioDB) {
-        val steps = withContext(Dispatchers.IO) { readTotalSteps() }
-        val heartRate = withContext(Dispatchers.IO) { readLastHeartRate() }
-        val (hours, minutes) = withContext(Dispatchers.IO) { readLastSleepDuration() }
+        try {
+            // Obtener los datos del usuario
+            val steps = withContext(Dispatchers.IO) { readTotalSteps() }
+            val fatRecord = withContext(Dispatchers.IO) { readBodyFatPercentage()  }
+            val heartRate = withContext(Dispatchers.IO) { readLastHeartRate() }
+            val (hours, minutes) = withContext(Dispatchers.IO) { readLastSleepDuration() }
 
-        val chatCompletionRequest = ChatCompletionRequest(
-            model = ModelId("gpt-4o-mini"),
-            messages = listOf(
-                ChatMessage(
-                    role = ChatRole.Assistant,
-                    content = "Dame recomedaciones bien detalladas de dieta y ejercicios para mejorar mi estado físico. " +
-                            "Actualmente mido ${usuarioDB.altura}, peso ${usuarioDB.peso[0]}, soy de género ${usuarioDB.genero} " +
-                            "y tengo ${usuarioDB.edad} años. He dado $steps pasos hoy, mi último ritmo cardíaco " +
-                            "fue de $heartRate bpm y he dormido $hours horas y $minutes minutos. " +
-                            "dame recomendaciones de salud en base a los pasos que di en el dia y como esto repercute en mi salud" +
-                            "y cuanto he dormido hoy dime si estoy bien segun mi edad." +
-                            "dame la respuesta sin poner simbolos de # ni otros parecidos, pon los titulos en negrita, necesito e texto mas limpio posible."
+            // Crear la solicitud de chat
+            val chatCompletionRequest = ChatCompletionRequest(
+                model = ModelId("gpt-4o-mini"),
+                messages = listOf(
+                    ChatMessage(
+                        role = ChatRole.Assistant,
+                        content = "Dado que el usuario tiene ${usuarioDB.edad} años, pesa ${usuarioDB.peso[0]} kg,de genero ${usuarioDB.genero}, mide ${usuarioDB.altura} cm, su frecuencia cardíaca en reposo es $heartRate BPM, su índice de grasa corporal es $fatRecord y " +
+                                "camina $steps pasos al día,ademas durmio  $hours horas y $minutes minutos. ¿cuáles serían las mejores recomendaciones personalizadas para mejorar su salud en términos de dieta y bienestar general?" +
+                                "dame la respuesta en un formato de maximo  3 parrafos, donde no haya simbolos en el texto, ademas dame el los datos entregados anteriormente y evalua si son buenos o malos,esta ultimo paso es obligatorio siempre se debe mostrar los datos tomados y evaluarlos" +
+                                ""
+
+                    )
                 )
             )
-        )
 
-        val completion: ChatCompletion = openAI.chatCompletion(chatCompletionRequest)
-        completion.choices.forEach {
-            Log.d("UCE", it.message?.content.toString())
+            // Llamada a la API de OpenAI
+            val completion: ChatCompletion = openAI.chatCompletion(chatCompletionRequest)
+
+            // Mostrar la respuesta en el log
+            completion.choices.forEach {
+                Log.d("UCE", it.message?.content.toString())
+            }
+
+            // Actualizar la UI con la respuesta
+            binding.chatGPT.text = completion.choices[0].message?.content.toString()
+
+
+        } catch (e: Exception) {
+            // Capturar cualquier excepción y mostrar un mensaje de error
+            Log.e("UCE", "Error al generar el reporte: ${e.message}")
+            binding.chatGPT.text = "Ocurrió un error al generar el reporte. Intenta nuevamente más tarde."
         }
-
-        binding.openAI.text = completion.choices[0].message?.content.toString()
-
+        binding.openAI.visibility = View.GONE
     }
+    private suspend fun readBodyFatPercentage(): Double = withContext(Dispatchers.IO) {
+        try {
+            val healthConnectClient = HealthConnectClient.getOrCreate(this@AguaActivity)
+            val startOfDay = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()
+
+            val response = healthConnectClient.readRecords<BodyFatRecord>(
+                ReadRecordsRequest(
+                    timeRangeFilter = TimeRangeFilter.between(startOfDay, Instant.now()),
+
+                    ascendingOrder = false
+                )
+            )
+
+            response.records.firstOrNull()?.percentage?.value?: 0.0
+        } catch (e: Exception) {
+            Log.e("HealthConnect", "Error al leer porcentaje de grasa corporal: ${e.message}", e)
+            0.0
+        }
+    }
+
+
+
+
 
     private suspend fun readTotalSteps(): Long = withContext(Dispatchers.IO) {
         try {
@@ -178,10 +235,11 @@ class AguaActivity : AppCompatActivity() {
     private suspend fun readLastHeartRate(): Number = withContext(Dispatchers.IO) {
         try {
             val healthConnectClient = HealthConnectClient.getOrCreate(this@AguaActivity)
+            val startOfDay = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()
             val response = healthConnectClient.readRecords(
                 ReadRecordsRequest(
                     HeartRateRecord::class,
-                    timeRangeFilter = TimeRangeFilter.before(Instant.now())
+                    timeRangeFilter = TimeRangeFilter.between(startOfDay, Instant.now())
                 )
             )
             val heartRates = response.records.flatMap { it.samples }

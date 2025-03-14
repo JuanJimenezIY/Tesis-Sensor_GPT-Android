@@ -27,6 +27,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+
             <TextView
                 android:id="@+id/ritmoCardiaco"
                 android:layout_marginTop="350px"
@@ -81,21 +83,52 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/progressBar" />
-            <TextView
 
-                android:id="@+id/openAI"
-                android:text="Informe"
-                android:layout_marginHorizontal="100px"
+            <TextView
+                android:id="@+id/grasaCorporal"
+
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/textoAyP"
+                app:layout_constraintTop_toBottomOf="@id/duracionSueno" />
+
+
+            <TextView
+                android:id="@+id/chatGPT"
+                android:layout_marginHorizontal="100px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:padding="20px"
                 app:layout_constraintTop_toBottomOf="@id/generar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:background="#77000000"
+                app:layout_constraintBottom_toBottomOf="parent"
 
 
-                ></TextView>
+                />
+
+            <LinearLayout
+
+                android:id="@+id/openAI"
+
+                android:layout_width="match_parent"
+                android:layout_height="500px"
+                android:layout_marginHorizontal="100px"
+                android:padding="20px"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+
+                app:layout_constraintTop_toBottomOf="@id/generar">
+                <include layout="@layout/shimmer_text"></include>
+                <include layout="@layout/shimmer_layout_asesoria"></include>
+                <include layout="@layout/shimmer_layout_asesoria"></include>
+                <include layout="@layout/shimmer_layout_asesoria"></include>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/generar"
                 style="@style/button"
@@ -104,10 +137,10 @@
                 android:layout_marginHorizontal="150px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:paddingTop="20px"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/duracionSueno"
+                app:layout_constraintTop_toBottomOf="@id/grasaCorporal"
                 app:layout_constraintBottom_toTopOf="@id/generar"
 
 

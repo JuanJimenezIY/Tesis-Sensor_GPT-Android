@@ -45,31 +45,8 @@ class PremiumActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        binding.facebook.setOnClickListener {
-            val facebookPackageName = "com.facebook.katana" // El paquete de la aplicación de Facebook
-
-            try {
-                val intent = packageManager.getLaunchIntentForPackage(facebookPackageName)
-                if (intent != null) {
-
-                    val facebookPageId = "115621758299827"
-                    val pageUrl = "https://www.facebook.com/$facebookPageId"
 
 
-                    intent.data = Uri.parse(pageUrl)
-                    startActivity(intent)
-                } else {
-                    // Si la aplicación de Facebook no está instalada
-                    // Puedes abrir la página en el navegador web u ofrecer instalar la aplicación
-                    // Por ejemplo:
-                    val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/115621758299827"))
-                    startActivity(webIntent)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                // Maneja cualquier excepción que pueda ocurrir al abrir la aplicación
-            }
-        }
         binding.lyChatCopia.visibility = View.INVISIBLE
         binding.plan.setOnClickListener {
 
@@ -117,9 +94,9 @@ class PremiumActivity : AppCompatActivity() {
 //                    content = "Dame recomedaciones bien detalldas dieta y ejercicios especificos para mejorar mi estado fisico actualmente mido "+
 //                          "  170 cm,peso 65kg,soy de genero masculino  y tengo 18"+
 //                              "de edad calcula mi requerimiento calorico diario con nivel de actividad fisica baja y dame recomendaciones"
-                    content = "Dame recomedaciones bien detalldas dieta y ejercicios especificos para mejorar mi estado fisico actualmente mido "
+                    content = "Dame recomedaciones bien detalldas de ejercicios especificos para mejorar mi estado fisico actualmente mido "
                             + usuarioDB.altura + ",peso " + usuarioDB.peso[0] + ",soy de genero " + usuarioDB.genero + " y tengo " + usuarioDB.edad +
-                            " años de edad calcula mi requerimiento calorico diario con nivel de actividad fisica baja y dame recomendaciones"
+                            " años de edad dame una rutina de ejrcicios  para la semana completa, no pongas simbolos raros como ## o  **  "
                 )
             )
         )
@@ -133,6 +110,8 @@ class PremiumActivity : AppCompatActivity() {
 
         binding.chatGPT.text=completion.choices[0].message?.content.toString()
         binding.lyChatCopia.visibility = View.GONE
+
+
 
     }
 }
