@@ -1,5 +1,6 @@
 package com.jimenez.ecuafit.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -39,7 +40,12 @@ class PremiumActivity : AppCompatActivity() {
 
         FirebaseApp.initializeApp(this)
 
-
+        val reporteGuardado = leerReporteGuardado(this)
+        if (!reporteGuardado.isNullOrEmpty()) {
+            binding.chatGPT.text = reporteGuardado
+            binding.lyChatCopia.visibility = View.GONE // Oculta el loading si ya hay respuesta
+            binding.plan.text= "Generar nuevo plan"
+        }
     }
 
     override fun onStart() {
@@ -70,8 +76,6 @@ class PremiumActivity : AppCompatActivity() {
 
                         }
                         // Utiliza el valor en tu app
-                    } else {
-                        // Maneja el fallo de fetch
                     }
                 }
             val configSettings = FirebaseRemoteConfigSettings.Builder()
@@ -96,7 +100,8 @@ class PremiumActivity : AppCompatActivity() {
 //                              "de edad calcula mi requerimiento calorico diario con nivel de actividad fisica baja y dame recomendaciones"
                     content = "Dame recomedaciones bien detalldas de ejercicios especificos para mejorar mi estado fisico actualmente mido "
                             + usuarioDB.altura + ",peso " + usuarioDB.peso[0] + ",soy de genero " + usuarioDB.genero + " y tengo " + usuarioDB.edad +
-                            " años de edad dame una rutina de ejrcicios  para la semana completa, no pongas simbolos raros como ## o  **  "
+                            " años de edad dame una rutina de ejrcicios  para la semana completa, no pongas simbolos raros como ## o  **, y divide cada dia de la "+
+                            "semana claramente "
                 )
             )
         )
@@ -105,13 +110,22 @@ class PremiumActivity : AppCompatActivity() {
 
             Log.d("UCE", it.message?.content.toString())
         }
+        val resultado = completion.choices[0].message?.content.toString()
+        guardarReporteEnPreferencias(this, resultado)
 
-
-
-        binding.chatGPT.text=completion.choices[0].message?.content.toString()
+        binding.chatGPT.text=resultado
         binding.lyChatCopia.visibility = View.GONE
 
 
 
+    }
+    fun guardarReporteEnPreferencias(context: Context, reporte: String) {
+        val prefs = context.getSharedPreferences("reportes", Context.MODE_PRIVATE)
+        prefs.edit().putString("reporte_guardado", reporte).apply()
+    }
+
+    fun leerReporteGuardado(context: Context): String? {
+        val prefs = context.getSharedPreferences("reportes", Context.MODE_PRIVATE)
+        return prefs.getString("reporte_guardado", null)
     }
 }

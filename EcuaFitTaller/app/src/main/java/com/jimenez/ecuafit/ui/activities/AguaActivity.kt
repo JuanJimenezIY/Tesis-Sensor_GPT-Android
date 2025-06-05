@@ -57,6 +57,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.health.connect.client.records.BodyFatRecord
 import androidx.health.connect.client.units.Percentage
 import com.google.android.material.snackbar.Snackbar
+import com.jimenez.ecuafit.ui.utilities.Calculos.Companion.round
 import kotlin.time.Duration.Companion.seconds
 
 class AguaActivity : AppCompatActivity() {
@@ -163,10 +164,10 @@ class AguaActivity : AppCompatActivity() {
                 messages = listOf(
                     ChatMessage(
                         role = ChatRole.Assistant,
-                        content = "Dado que el usuario tiene ${usuarioDB.edad} años, pesa ${usuarioDB.peso[0]} kg,de genero ${usuarioDB.genero}, mide ${usuarioDB.altura} cm, su frecuencia cardíaca en reposo es $heartRate BPM, su índice de grasa corporal es $fatRecord y " +
-                                "camina $steps pasos al día,ademas durmio  $hours horas y $minutes minutos. ¿cuáles serían las mejores recomendaciones personalizadas para mejorar su salud en términos de dieta y bienestar general?" +
-                                "dame la respuesta en un formato de maximo  3 parrafos, donde no haya simbolos en el texto, ademas dame el los datos entregados anteriormente y evalua si son buenos o malos,esta ultimo paso es obligatorio siempre se debe mostrar los datos tomados y evaluarlos" +
-                                ""
+                        content = "Dado que el usuario tiene ${usuarioDB.edad} años, pesa ${usuarioDB.peso[0]} kg,de genero ${usuarioDB.genero}, mide ${usuarioDB.altura} cm, su frecuencia cardíaca promedio en reposo es $heartRate BPM, su ultimo índice de grasa corporal es $fatRecord y " +
+                                "camino  $steps pasos en el día,ademas durmio  $hours horas y $minutes minutos. ¿cuáles serían las mejores recomendaciones personalizadas para mejorar su salud en términos de dieta y bienestar general?" +
+                                "dame la respuesta en un formato de maximo  3 parrafos, donde no haya simbolos en el texto, ademas dame los datos entregados anteriormente y evalua si son buenos o malos,esta ultimo paso es obligatorio siempre se debe mostrar los datos tomados y evaluarlos " +
+                                "en comparacion con la salud normal que debe tener una persona, comportate como un experto en fitness"
 
                     )
                 )
@@ -204,7 +205,11 @@ class AguaActivity : AppCompatActivity() {
                 )
             )
 
-            response.records.firstOrNull()?.percentage?.value?: 0.0
+            val valoresValidos = response.records.mapNotNull { it.percentage?.value }
+                .filter { it in 3.0..60.0 } // Rango biológicamente razonable
+
+            val promedio = valoresValidos.average().takeIf { !it.isNaN() } ?: 0.0
+            promedio
         } catch (e: Exception) {
             Log.e("HealthConnect", "Error al leer porcentaje de grasa corporal: ${e.message}", e)
             0.0
@@ -225,7 +230,10 @@ class AguaActivity : AppCompatActivity() {
                     timeRangeFilter = TimeRangeFilter.between(startOfDay, Instant.now())
                 )
             )
-            response.records.sumOf { it.count }
+            response.records.sumOf {
+                it.count
+            }
+
         } catch (e: Exception) {
             Log.e("HealthConnect", "Error al leer pasos totales: ${e.message}", e)
             0
@@ -242,8 +250,14 @@ class AguaActivity : AppCompatActivity() {
                     timeRangeFilter = TimeRangeFilter.between(startOfDay, Instant.now())
                 )
             )
-            val heartRates = response.records.flatMap { it.samples }
-            heartRates.lastOrNull()?.beatsPerMinute ?: 0.0
+            val valoresValidos = response.records
+                .flatMap { it.samples } // Extrae todos los samples de todos los registros
+                .map { it.beatsPerMinute } // Toma el valor de BPM
+                .filter { it.toDouble() in 30.0..220.0 }
+
+            // Calcula el promedio si hay valores válidos, si no, retorna 0.0
+            val promedio = valoresValidos.average().takeIf { !it.isNaN() } ?: 0.0
+            (round(promedio * 10) / 10)
         } catch (e: Exception) {
             Log.e("HealthConnect", "Error al leer ritmo cardíaco: ${e.message}", e)
             0.0
