@@ -79,6 +79,10 @@ class AguaActivity : AppCompatActivity() {
 
         binding.openAI.visibility = View.INVISIBLE
         binding.generar.setOnClickListener {
+
+            if(binding.chatGPT.text!=null){
+                binding.chatGPT.text=""
+            }
             binding.openAI.visibility = View.VISIBLE
 
 

@@ -115,7 +115,7 @@
     </style>
 
     <style name="textoAyP" >
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">28sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/black</item>
     </style>

@@ -32,7 +32,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="32dp"
                 android:text="Registro de Usuario"
-                android:textColor="@color/principal_color_ej" />
+                 />
 
             <TextView
                 style="@style/loginTextTitle"
@@ -76,12 +76,11 @@
                 android:textColor="@color/color_complementario"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/editTextGenero"
+            <Spinner
+                android:id="@+id/spinnerGenero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Masculino o Femenino"
-                android:inputType="text" />
+                android:spinnerMode="dropdown"/>
 
             <TextView
                 style="@style/loginTextTitle"
@@ -153,12 +152,14 @@
 
             <Button
                 android:id="@+id/buttonRegister"
+                style="@style/button"
+                android:backgroundTint="@color/color_boton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp"
 
-                android:backgroundTint="@color/principal_color_ej"
+
                 android:text="Registrar" />
         </LinearLayout>
 

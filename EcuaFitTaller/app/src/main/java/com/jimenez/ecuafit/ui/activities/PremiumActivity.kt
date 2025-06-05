@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.aallam.openai.api.BetaOpenAI
@@ -43,11 +44,35 @@ class PremiumActivity : AppCompatActivity() {
         val reporteGuardado = leerReporteGuardado(this)
         if (!reporteGuardado.isNullOrEmpty()) {
             binding.chatGPT.text = reporteGuardado
+
             binding.lyChatCopia.visibility = View.GONE // Oculta el loading si ya hay respuesta
             binding.plan.text= "Generar nuevo plan"
         }
     }
 
+    private fun generarNuevoPlan() {
+        binding.lyChatCopia.visibility = View.VISIBLE
+
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        remoteConfig.fetchAndActivate().addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                val valor = remoteConfig.getString("api_key")
+                openAI = OpenAI(valor, LoggingConfig(), Timeout(socket = 120.seconds))
+
+                lifecycleScope.launch(Dispatchers.Main) {
+                    val user = withContext(Dispatchers.IO) {
+                        EcuaFit.getDbUsuarioInstance().usuarioDao().getAll()
+                    }
+                    generaReporte(user)
+                }
+            }
+        }
+
+        val configSettings = FirebaseRemoteConfigSettings.Builder()
+            .setMinimumFetchIntervalInSeconds(3600)
+            .build()
+        remoteConfig.setConfigSettingsAsync(configSettings)
+    }
     override fun onStart() {
         super.onStart()
 
@@ -55,34 +80,23 @@ class PremiumActivity : AppCompatActivity() {
 
         binding.lyChatCopia.visibility = View.INVISIBLE
         binding.plan.setOnClickListener {
+            val reporteGuardado = leerReporteGuardado(this)
 
-            binding.lyChatCopia.visibility = View.VISIBLE
-
-            val remoteConfig = FirebaseRemoteConfig.getInstance()
-            remoteConfig.fetchAndActivate()
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Fetch exitoso y valores activados
-                        val valor = remoteConfig.getString("api_key")
-                        openAI = OpenAI(
-                            valor, LoggingConfig(),Timeout(socket = 120.seconds)
-
-                        )
-                        lifecycleScope.launch(Dispatchers.Main) {
-                            var user = withContext(Dispatchers.IO) {
-                                EcuaFit.getDbUsuarioInstance().usuarioDao().getAll()
-                            }
-                            generaReporte(user)
-
-                        }
-                        // Utiliza el valor en tu app
+            if (!reporteGuardado.isNullOrEmpty()) {
+                // Ya hay un reporte guardado, mostrar alerta de confirmación
+                AlertDialog.Builder(this)
+                    .setTitle("¿Estás seguro?")
+                    .setMessage("Ya tienes un plan generado. ¿Deseas reemplazarlo por uno nuevo?")
+                    .setPositiveButton("Sí") { _, _ ->
+                        binding.chatGPT.text=""
+                        generarNuevoPlan()
                     }
-                }
-            val configSettings = FirebaseRemoteConfigSettings.Builder()
-                .setMinimumFetchIntervalInSeconds(3600) // Intervalo mínimo entre actualizaciones
-                .build()
-            remoteConfig.setConfigSettingsAsync(configSettings)
-        }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
+            } else {
+                // No hay reporte guardado, generar directamente
+                generarNuevoPlan()
+            }}
 
     }
 
