@@ -109,11 +109,9 @@ class PremiumActivity : AppCompatActivity() {
 
                 ChatMessage(
                     role = ChatRole.Assistant,
-//                    content = "Dame recomedaciones bien detalldas dieta y ejercicios especificos para mejorar mi estado fisico actualmente mido "+
-//                          "  170 cm,peso 65kg,soy de genero masculino  y tengo 18"+
-//                              "de edad calcula mi requerimiento calorico diario con nivel de actividad fisica baja y dame recomendaciones"
+
                     content = "Dame recomedaciones bien detalldas de ejercicios especificos para mejorar mi estado fisico actualmente mido "
-                            + usuarioDB.altura + ",peso " + usuarioDB.peso[0] + ",soy de genero " + usuarioDB.genero + " y tengo " + usuarioDB.edad +
+                            + usuarioDB.altura + ",peso " + usuarioDB.peso!!.last().toDouble() + ",soy de genero " + usuarioDB.genero + " y tengo " + usuarioDB.edad +
                             " años de edad dame una rutina de ejrcicios  para la semana completa, no pongas simbolos raros como ## o  **, y divide cada dia de la "+
                             "semana claramente "
                 )

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/principal_color_ej"
+    android:background="@drawable/comida_backgorund"
     tools:context=".ui.activities.PremiumActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,11 +32,13 @@
             android:layout_height="wrap_content"
             android:text="Generar plan"
             android:backgroundTint="@color/color_boton"
-            android:layout_marginTop="10dp"
+
             android:layout_marginHorizontal="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chat">
+            app:layout_constraintTop_toBottomOf="@id/scroll"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
         </Button>
 
@@ -49,10 +51,10 @@
             android:layout_marginHorizontal="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
+            android:layout_marginTop="110dp"
             app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintTop_toBottomOf="@+id/plan"
+            app:layout_constraintTop_toBottomOf="@+id/chat"
             app:layout_constraintVertical_bias="0.053">
 
             <TextView
@@ -72,11 +74,11 @@
             android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="110dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plan"
+            app:layout_constraintTop_toBottomOf="@+id/chat"
             android:textSize="48px"
 
 
@@ -94,19 +96,7 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txt_face"
-            style="@style/textSubTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text=""
-            android:textSize="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scroll" />
+
 
 
 

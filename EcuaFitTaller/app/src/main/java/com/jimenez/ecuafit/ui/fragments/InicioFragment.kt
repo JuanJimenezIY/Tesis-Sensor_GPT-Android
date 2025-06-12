@@ -22,6 +22,7 @@ import com.jimenez.ecuafit.data.entities.ComidaDB
 import com.jimenez.ecuafit.data.entities.UsuarioDB
 import com.jimenez.ecuafit.databinding.FragmentInicioBinding
 import com.jimenez.ecuafit.logic.ComidaLogicDB
+import com.jimenez.ecuafit.ui.activities.PesoActivity
 import com.jimenez.ecuafit.ui.activities.PremiumActivity
 import com.jimenez.ecuafit.ui.utilities.EcuaFit
 import kotlinx.coroutines.Dispatchers
@@ -143,6 +144,10 @@ class InicioFragment : Fragment() {
             } else {
                 binding.inicioCalsConsu.text = "0"
             }
+        }
+        binding.pesoCard.setOnClickListener {
+            val intent = Intent(requireContext(), PesoActivity::class.java)
+            startActivity(intent)
         }
     }
 

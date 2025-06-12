@@ -74,11 +74,7 @@ class DiarioFragment : Fragment() {
         searchView = binding.searchComida
         //progressBar = binding.progressBar
         // Inflate the layout for this fragment
-        binding.agua.setOnClickListener {
-            val intent = Intent(requireContext(), AguaActivity::class.java)
-            startActivity(intent)
 
-        }
         return binding.root
     }
 

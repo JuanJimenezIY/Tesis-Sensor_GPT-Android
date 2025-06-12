@@ -105,10 +105,6 @@ class InformeFragment : Fragment() {
 
         //var comidaDiaria=
         // Configurar el click listener para el CardView de Peso
-        binding.pesoText.setOnClickListener {
-            val intent = Intent(requireContext(), PesoActivity::class.java)
-            startActivity(intent)
-        }
         binding.infDiario.setOnClickListener {
             val intent = Intent(requireContext(), ComidaDiariaActivity::class.java)
             startActivity(intent)
@@ -123,6 +119,11 @@ class InformeFragment : Fragment() {
         }
         binding.cardEjercicios.setOnClickListener {
             val intent = Intent(requireContext(), EjerciciosActivity::class.java)
+            startActivity(intent)
+
+        }
+        binding.agua.setOnClickListener {
+            val intent = Intent(requireContext(), AguaActivity::class.java)
             startActivity(intent)
 
         }

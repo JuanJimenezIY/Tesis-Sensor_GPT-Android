@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.jimenez.ecuafit.R
@@ -45,6 +46,7 @@ class PesoActivity : AppCompatActivity() {
     }
     fun recoverPeso(){
             binding.peso.text= Editable.Factory.getInstance().newEditable(usuario.peso[usuario.peso.size-1])
+        Log.d("Peso", usuario.peso.toString())
 
 
     }
@@ -56,5 +58,6 @@ class PesoActivity : AppCompatActivity() {
             withContext(Dispatchers.IO){
                 EcuaFit.getDbUsuarioInstance().usuarioDao().update(usuario.peso.plus(nuevoPeso))
             }
+
     }
 }

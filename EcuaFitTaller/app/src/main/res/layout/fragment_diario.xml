@@ -48,7 +48,7 @@
 
 
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:backgroundTint="@color/principal_color_ej"
@@ -65,15 +65,16 @@
         android:id="@+id/lyMainCopia"
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
+
+        app:layout_constraintBottom_toBottomOf="@+id/rvComidas"
         app:layout_constraintEnd_toEndOf="parent"
+
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchComida"
-
-
-        >
+        app:layout_constraintTop_toBottomOf="@id/searchComida">
 
         <include layout="@layout/shimmer_layout_comida"></include>
 
@@ -83,49 +84,11 @@
 
         <include layout="@layout/shimmer_layout_comida"></include>
 
+        <include layout="@layout/shimmer_layout_comida"></include>
         <include layout="@layout/shimmer_layout_comida"></include>
 
     </LinearLayout>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardAgua"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="35dp"
-        android:layout_marginTop="15dp"
-        android:clickable="true"
 
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvComidas">
-        <LinearLayout
-            android:id="@+id/agua"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/aguaText"
-                android:layout_width="240dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/salud"
-
-                android:textSize="24dp">
-
-            </TextView>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:src="@drawable/icono_salud">
-
-            </ImageView>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 
 
 

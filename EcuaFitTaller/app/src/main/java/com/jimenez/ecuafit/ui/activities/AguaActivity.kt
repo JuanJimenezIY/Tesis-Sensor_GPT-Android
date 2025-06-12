@@ -84,6 +84,9 @@ class AguaActivity : AppCompatActivity() {
                 binding.chatGPT.text=""
             }
             binding.openAI.visibility = View.VISIBLE
+            binding.generar.isEnabled=false
+            binding.generar.text = "Cargando..."
+            binding.generar.setBackgroundColor(ContextCompat.getColor(this, R.color.black))
 
 
             val remoteConfig = FirebaseRemoteConfig.getInstance()
@@ -168,10 +171,10 @@ class AguaActivity : AppCompatActivity() {
                 messages = listOf(
                     ChatMessage(
                         role = ChatRole.Assistant,
-                        content = "Dado que el usuario tiene ${usuarioDB.edad} años, pesa ${usuarioDB.peso[0]} kg,de genero ${usuarioDB.genero}, mide ${usuarioDB.altura} cm, su frecuencia cardíaca promedio en reposo es $heartRate BPM, su ultimo índice de grasa corporal es $fatRecord y " +
-                                "camino  $steps pasos en el día,ademas durmio  $hours horas y $minutes minutos. ¿cuáles serían las mejores recomendaciones personalizadas para mejorar su salud en términos de dieta y bienestar general?" +
-                                "dame la respuesta en un formato de maximo  3 parrafos, donde no haya simbolos en el texto, ademas dame los datos entregados anteriormente y evalua si son buenos o malos,esta ultimo paso es obligatorio siempre se debe mostrar los datos tomados y evaluarlos " +
-                                "en comparacion con la salud normal que debe tener una persona, comportate como un experto en fitness"
+                        content = "Dado que el usuario tiene ${usuarioDB.edad} años, esta es su lista de pesos a traves del tiempo ${usuarioDB.peso} dame una recomendacion nutricional comparando los pesos,felicita al usuario si ha bajado de peso; y tomando el ultimo como el actual peso,de genero ${usuarioDB.genero}, mide ${usuarioDB.altura} cm, su frecuencia cardíaca promedio en reposo es $heartRate BPM, su  índice de grasa corporal es $fatRecord y " +
+                                "camino  $steps pasos en el día,ademas durmio  $hours horas y $minutes minutos. ¿cuáles serían las mejores recomendaciones personalizadas para mejorar su salud en términos de  dieta dando una dieta especifcia  y consejos de bienestar general?" +
+                                "dame la respuesta en un formato de maximo  4 parrafos, donde no haya simbolos en el texto, ademas dame los datos entregados anteriormente y evalua si son buenos o malos detalladamente,esta ultimo paso es obligatorio siempre se debe mostrar los datos tomados y evaluarlos " +
+                                "en comparacion con la salud normal que debe tener una persona, comportate como un experto en fitness, si algun parametro es 0.0 ignorarlo y no mencionarlo"
 
                     )
                 )
@@ -195,6 +198,9 @@ class AguaActivity : AppCompatActivity() {
             binding.chatGPT.text = "Ocurrió un error al generar el reporte. Intenta nuevamente más tarde."
         }
         binding.openAI.visibility = View.GONE
+        binding.generar.isEnabled=true
+        binding.generar.text = "Generar de nuevo"
+        binding.generar.setBackgroundColor(ContextCompat.getColor(this, R.color.color_boton))
     }
     private suspend fun readBodyFatPercentage(): Double = withContext(Dispatchers.IO) {
         try {
@@ -213,7 +219,9 @@ class AguaActivity : AppCompatActivity() {
                 .filter { it in 3.0..60.0 } // Rango biológicamente razonable
 
             val promedio = valoresValidos.average().takeIf { !it.isNaN() } ?: 0.0
+
             promedio
+
         } catch (e: Exception) {
             Log.e("HealthConnect", "Error al leer porcentaje de grasa corporal: ${e.message}", e)
             0.0

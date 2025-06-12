@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/principal_color_ej"
+    android:background="@drawable/comida_backgorund"
     tools:context=".ui.activities.EjerciciosActivity">
 
 
