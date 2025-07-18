@@ -46,11 +46,11 @@ class PesoActivity : AppCompatActivity() {
     }
     fun recoverPeso(){
             binding.peso.text= Editable.Factory.getInstance().newEditable(usuario.peso[usuario.peso.size-1])
-        Log.d("Peso", usuario.peso.toString())
+
 
 
     }
-    //acutalizar que el peso ingresado se ingrese en la bsae de datos
+
     @SuppressLint("SuspiciousIndentation")
     suspend fun actualizarPeso() {
         val nuevoPeso=binding.peso.text.toString()

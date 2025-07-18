@@ -14,13 +14,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SessionManager {
-    // private val db = FirebaseFirestore.getInstance()
+
     companion object {
 
         fun encryptPass(pass: String): String {
 
             var bcryptHashString = BCrypt.withDefaults().hashToString(12, pass.toCharArray());
-            // var result = BCrypt.verifyer().verify(pass.toCharArray(), bcryptHashString);
+
             return bcryptHashString
         }
 
@@ -33,7 +33,7 @@ class SessionManager {
 
         fun guardarSesion(pref: SharedPreferences) {
 
-            // val sharedPref=pref.getSharedPreferences("sesion", Context.MODE_PRIVATE)
+
             val estado = true;
             with(pref.edit()) {
                 putBoolean("estado_usu", estado)
@@ -44,12 +44,9 @@ class SessionManager {
         }
 
         fun validarSesion(pref: SharedPreferences): Boolean {
-            //val sharedPref=getSharedPreferences("sesion",Context.MODE_PRIVATE)
+
             return pref.getBoolean("estado_usu", false)
-//        var intent = Intent(
-//            this, MenuActivity::class.java
-//        )
-//        startActivity(intent)
+
         }
 
         suspend fun logOut(sharedPreferences: SharedPreferences) {
@@ -58,15 +55,14 @@ class SessionManager {
             UsuarioLogicDB().deleteAll()
             ComidaLogicDB().deleteAll()
 
-            //val sharedPref = requireContext().getSharedPreferences("sesion", Context.MODE_PRIVATE)
+
             with(sharedPreferences.edit()) {
                 putBoolean("estado_usu", false).apply()
             }
-//            val intent = Intent(requireContext(), MainActivity::class.java)
-//            startActivity(intent)
+
         }
         fun resetAgua(sharedPreferences: SharedPreferences){
-           // val sharedPref = getSharedPreferences("agua", Context.MODE_PRIVATE)
+
             with(sharedPreferences.edit()) {
                 putInt("agua", 0)
                     .apply()

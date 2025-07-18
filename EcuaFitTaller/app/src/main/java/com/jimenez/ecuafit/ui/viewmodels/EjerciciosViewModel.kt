@@ -7,7 +7,7 @@ import com.jimenez.ecuafit.data.entities.Ejercicio
 import com.jimenez.ecuafit.logic.EjercicioLogic
 
 class EjerciciosViewModel : ViewModel() {
-    // Puedes definir propiedades LiveData si lo deseas
+
     val progressState =  MutableLiveData<Int>()
      val ejercicioItemsLiveData: MutableLiveData<List<Ejercicio>> = MutableLiveData()
 

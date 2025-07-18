@@ -99,7 +99,7 @@ class InicioFragment : Fragment() {
                 peso = usuarioDB.peso
             }
         }
-        Log.d("UCE", peso.toString())
+
         val data: MutableList<DataEntry> = ArrayList()
         val maxVisible = 10
 

@@ -94,7 +94,6 @@ class AguaActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val valor = remoteConfig.getString("api_key")
-                        Log.d("UCE",  valor)
 
                         openAI = OpenAI(
                             valor, LoggingConfig(), Timeout(socket = 120.seconds)
@@ -124,10 +123,10 @@ class AguaActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Main) {
             val totalSteps = readTotalSteps()
             binding.pasos.text = "Pasos: $totalSteps / 8000"
-            setProgressBarWithAnimation(binding.progressBar, totalSteps.toInt()) // Actualizar la barra de progreso con animación
+            setProgressBarWithAnimation(binding.progressBar, totalSteps.toInt())
             binding.pasosP.text = "${(totalSteps.toDouble() / binding.progressBar.max * 100).toInt()}%"
 
-            // Mostrar mensaje de felicitaciones si se alcanza la meta
+
             if (totalSteps >= 5000) {
                 Snackbar.make(binding.root, "¡Felicitaciones! Has alcanzado tu meta de pasos.", Snackbar.LENGTH_LONG).show()
             }
@@ -159,19 +158,19 @@ class AguaActivity : AppCompatActivity() {
     @OptIn(BetaOpenAI::class)
     private suspend fun generaReporte(usuarioDB: UsuarioDB) {
         try {
-            // Obtener los datos del usuario
+
             val steps = withContext(Dispatchers.IO) { readTotalSteps() }
             val fatRecord = withContext(Dispatchers.IO) { readBodyFatPercentage()  }
             val heartRate = withContext(Dispatchers.IO) { readLastHeartRate() }
             val (hours, minutes) = withContext(Dispatchers.IO) { readLastSleepDuration() }
 
-            // Crear la solicitud de chat
             val chatCompletionRequest = ChatCompletionRequest(
                 model = ModelId("gpt-4o-mini"),
                 messages = listOf(
                     ChatMessage(
                         role = ChatRole.Assistant,
-                        content = "Dado que el usuario tiene ${usuarioDB.edad} años, esta es su lista de pesos a traves del tiempo ${usuarioDB.peso} dame una recomendacion nutricional comparando los pesos,felicita al usuario si ha bajado de peso; y tomando el ultimo como el actual peso,de genero ${usuarioDB.genero}, mide ${usuarioDB.altura} cm, su frecuencia cardíaca promedio en reposo es $heartRate BPM, su  índice de grasa corporal es $fatRecord y " +
+                        content = "Dado que el usuario tiene ${usuarioDB.edad} años, esta es su lista de pesos a traves del tiempo ${usuarioDB.peso} ,  dame una recomendacion nutricional comparando los pesos ,felicita al usuario si ha bajado de peso; y tomando el ultimo como el actual"+
+                                " peso,de genero ${usuarioDB.genero}, mide ${usuarioDB.altura} cm, su frecuencia cardíaca promedio en reposo es $heartRate BPM, su  índice de grasa corporal es $fatRecord y " +
                                 "camino  $steps pasos en el día,ademas durmio  $hours horas y $minutes minutos. ¿cuáles serían las mejores recomendaciones personalizadas para mejorar su salud en términos de  dieta dando una dieta especifcia  y consejos de bienestar general?" +
                                 "dame la respuesta en un formato de maximo  4 parrafos, donde no haya simbolos en el texto, ademas dame los datos entregados anteriormente y evalua si son buenos o malos detalladamente,esta ultimo paso es obligatorio siempre se debe mostrar los datos tomados y evaluarlos " +
                                 "en comparacion con la salud normal que debe tener una persona, comportate como un experto en fitness, si algun parametro es 0.0 ignorarlo y no mencionarlo"
@@ -180,20 +179,16 @@ class AguaActivity : AppCompatActivity() {
                 )
             )
 
-            // Llamada a la API de OpenAI
             val completion: ChatCompletion = openAI.chatCompletion(chatCompletionRequest)
 
-            // Mostrar la respuesta en el log
             completion.choices.forEach {
                 Log.d("UCE", it.message?.content.toString())
             }
-
-            // Actualizar la UI con la respuesta
             binding.chatGPT.text = completion.choices[0].message?.content.toString()
 
 
         } catch (e: Exception) {
-            // Capturar cualquier excepción y mostrar un mensaje de error
+
             Log.e("UCE", "Error al generar el reporte: ${e.message}")
             binding.chatGPT.text = "Ocurrió un error al generar el reporte. Intenta nuevamente más tarde."
         }
@@ -216,7 +211,7 @@ class AguaActivity : AppCompatActivity() {
             )
 
             val valoresValidos = response.records.mapNotNull { it.percentage?.value }
-                .filter { it in 3.0..60.0 } // Rango biológicamente razonable
+                .filter { it in 3.0..60.0 }
 
             val promedio = valoresValidos.average().takeIf { !it.isNaN() } ?: 0.0
 
@@ -263,11 +258,10 @@ class AguaActivity : AppCompatActivity() {
                 )
             )
             val valoresValidos = response.records
-                .flatMap { it.samples } // Extrae todos los samples de todos los registros
-                .map { it.beatsPerMinute } // Toma el valor de BPM
+                .flatMap { it.samples }
+                .map { it.beatsPerMinute }
                 .filter { it.toDouble() in 30.0..220.0 }
 
-            // Calcula el promedio si hay valores válidos, si no, retorna 0.0
             val promedio = valoresValidos.average().takeIf { !it.isNaN() } ?: 0.0
             (round(promedio * 10) / 10)
         } catch (e: Exception) {
@@ -302,7 +296,7 @@ class AguaActivity : AppCompatActivity() {
 
     private fun setProgressBarWithAnimation(progressBar: ProgressBar, progressTo: Int) {
         val animation = ObjectAnimator.ofInt(progressBar, "progress", progressBar.progress, progressTo)
-        animation.duration = 5000 // Duración de la animación en milisegundos
+        animation.duration = 5000
         animation.interpolator = DecelerateInterpolator()
         animation.start()
     }
@@ -311,8 +305,7 @@ class AguaActivity : AppCompatActivity() {
         override fun onReceive(context: Context, intent: Intent) {
             val steps = intent.getIntExtra("steps", 0)
             binding.pasos.text = "Pasos: $steps"
-            binding.progressBar.progress = steps // Actualizar la barra de progreso
-            Log.d("WearConnection", "Pasos recibidos: $steps")
+            binding.progressBar.progress = steps
         }
     }
 }

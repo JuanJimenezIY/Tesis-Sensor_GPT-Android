@@ -23,7 +23,7 @@ class RegistroActivity : AppCompatActivity() {
         binding = ActivityRegistroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Configurar spinner de género
+
         val generos = listOf("Selecciona tu género", "Masculino", "Femenino")
         val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, generos)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

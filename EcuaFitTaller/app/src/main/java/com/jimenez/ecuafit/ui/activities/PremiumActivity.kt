@@ -45,7 +45,7 @@ class PremiumActivity : AppCompatActivity() {
         if (!reporteGuardado.isNullOrEmpty()) {
             binding.chatGPT.text = reporteGuardado
 
-            binding.lyChatCopia.visibility = View.GONE // Oculta el loading si ya hay respuesta
+            binding.lyChatCopia.visibility = View.GONE
             binding.plan.text= "Generar nuevo plan"
         }
     }
@@ -83,7 +83,7 @@ class PremiumActivity : AppCompatActivity() {
             val reporteGuardado = leerReporteGuardado(this)
 
             if (!reporteGuardado.isNullOrEmpty()) {
-                // Ya hay un reporte guardado, mostrar alerta de confirmación
+
                 AlertDialog.Builder(this)
                     .setTitle("¿Estás seguro?")
                     .setMessage("Ya tienes un plan generado. ¿Deseas reemplazarlo por uno nuevo?")
@@ -94,7 +94,7 @@ class PremiumActivity : AppCompatActivity() {
                     .setNegativeButton("Cancelar", null)
                     .show()
             } else {
-                // No hay reporte guardado, generar directamente
+
                 generarNuevoPlan()
             }}
 
@@ -109,7 +109,6 @@ class PremiumActivity : AppCompatActivity() {
 
                 ChatMessage(
                     role = ChatRole.Assistant,
-
                     content = "Dame recomedaciones bien detalldas de ejercicios especificos para mejorar mi estado fisico actualmente mido "
                             + usuarioDB.altura + ",peso " + usuarioDB.peso!!.last().toDouble() + ",soy de genero " + usuarioDB.genero + " y tengo " + usuarioDB.edad +
                             " años de edad dame una rutina de ejrcicios  para la semana completa, no pongas simbolos raros como ## o  **, y divide cada dia de la "+

@@ -24,10 +24,9 @@ class EjercicioLogic {
                 ejercicioList.add(m)
             }
         } catch (e: Exception) {
-            // Handle any exceptions that may occur during data retrieval
-            // e.g., log the error or display an error message
+
         }
-        Log.d("UCE",ejercicioList.toString())
+
         ejercicioList
     }
 }

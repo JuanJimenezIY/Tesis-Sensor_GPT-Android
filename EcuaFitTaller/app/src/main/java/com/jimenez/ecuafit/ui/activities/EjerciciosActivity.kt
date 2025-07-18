@@ -29,7 +29,7 @@ class EjerciciosActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
     private val ejercicioViewModel by viewModels<EjerciciosViewModel>()
 
-    //  private lateinit var progressBar:ProgressBar
+
     private var rvAdapter: EjercicioAdapter = EjercicioAdapter(::openVideo)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +81,6 @@ class EjerciciosActivity : AppCompatActivity() {
             rvAdapter.items = ejercicioItems
             binding.rvEjercicios.apply {
                 this.adapter = rvAdapter
-                //  this.layoutManager = lmanager
                 this.layoutManager = lmanager
             }
 

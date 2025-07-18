@@ -54,10 +54,6 @@ class MainActivity : AppCompatActivity() {
         requestPermissionLauncher.launch(permissions.toTypedArray())
     }
 
-
-
-
-
     override fun onStart() {
         super.onStart()
         initClass()
