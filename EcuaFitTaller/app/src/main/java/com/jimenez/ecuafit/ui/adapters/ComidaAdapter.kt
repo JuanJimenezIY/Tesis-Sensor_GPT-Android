@@ -34,7 +34,7 @@ class ComidaAdapter(
         ) {
             binding.nombreComida.text = item.nombre
             binding.caloriasComida.text = item.calorias.toString() + " kcals"
-            //Picasso.get().load(item.foto).into(binding.imgComida)
+
 
 
             itemView.setOnClickListener {
@@ -46,10 +46,7 @@ class ComidaAdapter(
                 Snackbar.make(binding.addComida,"Comida agregada", Snackbar.LENGTH_LONG).show()
 
             }
-            //boton vista marvel chars
-            //  binding.b{
-            //    fnSave(item)
-            //}
+
 
 
         }

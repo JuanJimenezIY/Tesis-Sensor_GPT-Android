@@ -26,9 +26,6 @@ class StepListenerService : WearableListenerService(), DataClient.OnDataChangedL
             if (event.type == DataEvent.TYPE_CHANGED && event.dataItem.uri.path == "/steps") {
                 val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
                 val steps = dataMap.getInt("steps", 0)
-                Log.d("WearConnection", "Pasos actualizados: $steps")
-
-                // Enviar un broadcast para actualizar la UI
                 val intent = Intent("com.jimenez.ecuafit.STEP_UPDATE")
                 intent.putExtra("steps", steps)
                 sendBroadcast(intent)

@@ -40,10 +40,9 @@ class ComidaDiariaActivity : AppCompatActivity() {
 
 
         lifecycleScope.launch(Dispatchers.Main) {
-            // progressBar.visibility = View.VISIBLE
+
             comidaItems = withContext(Dispatchers.IO) {
                 return@withContext ComidaLogicDB().getAllComidaByFecha(fecha)
-
 
             } as MutableList<ComidaDB>
             if (comidaItems.size == 0) {
@@ -53,18 +52,12 @@ class ComidaDiariaActivity : AppCompatActivity() {
             }
             rvAdapter.items = comidaItems
 
-
-
-
-
-
-
             binding.rvComidas.apply {
                 this.adapter = rvAdapter
-                //  this.layoutManager = lmanager
+
                 this.layoutManager = lmanager
             }
-            // progressBar.visibility = View.GONE
+
 
 
         }

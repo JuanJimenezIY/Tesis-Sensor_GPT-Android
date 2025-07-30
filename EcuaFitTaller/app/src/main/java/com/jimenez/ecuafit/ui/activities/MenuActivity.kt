@@ -51,14 +51,14 @@ class MenuActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.inicio -> {
-                    // Respond to navigation item 1 click
+
                     FragmentsManager().replaceFragment(
                         supportFragmentManager,binding.frmContainer.id,InicioFragment()
                     )
                     true
                 }
                 R.id.diario -> {
-                    // Respond to navigation item 2 click
+
                     FragmentsManager().replaceFragment(
                         supportFragmentManager,binding.frmContainer.id,DiarioFragment()
                     )
@@ -66,7 +66,7 @@ class MenuActivity : AppCompatActivity() {
                     true
                 }
                 R.id.informe -> {
-                    // Respond to navigation item 2 click
+
                     FragmentsManager().replaceFragment(
                         supportFragmentManager,binding.frmContainer.id,InformeFragment()
                     )

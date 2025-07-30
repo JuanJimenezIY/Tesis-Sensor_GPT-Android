@@ -38,50 +38,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         sharedPref = getSharedPreferences("sesion", Context.MODE_PRIVATE)
 
+
         val permissions = setOf(
             HealthPermissions.READ_STEPS,
             HealthPermissions.READ_HEART_RATE,
+            HealthPermissions.READ_SLEEP,
+            HealthPermissions.READ_BODY_FAT
 
         )
 
         val requestPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
-        ) { result ->
-            if (result.all { it.value }) {
-                obtenerPasos()
-            } else {
-                Log.e("HealthConnect", "Permisos denegados")
-            }
+        ) {
         }
         requestPermissionLauncher.launch(permissions.toTypedArray())
-    }
-
-    private fun obtenerPasos() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            val steps = readSteps()
-            Log.d("WearConnection", "Pasos obtenidos: $steps")
-        }
-    }
-
-    private suspend fun readSteps(): Long = withContext(Dispatchers.IO) {
-        try {
-            val healthConnectClient = HealthConnectClient.getOrCreate(this@MainActivity)
-            val response = healthConnectClient.readRecords(
-                ReadRecordsRequest(
-                    StepsRecord::class,
-                    timeRangeFilter = TimeRangeFilter.between(
-                        Instant.now().minusSeconds(86400),
-                        Instant.now()
-                    )
-                )
-            )
-            val steps = response.records.sumOf { it.count }
-            Log.d("HealthConnect", "Pasos obtenidos: $steps")
-            steps
-        } catch (e: Exception) {
-            Log.e("HealthConnect", "Error al leer pasos: ${e.message}", e)
-            0
-        }
     }
 
     override fun onStart() {
@@ -100,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             if (binding.txtName.text.isNotEmpty() && binding.txtPassword.text.isNotEmpty()) {
                 logIn(binding.txtName.text.toString(), binding.txtPassword.text.toString())
             } else {
-                Snackbar.make(binding.txtContraseA, "Ingrese todos los campos", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.txtPassword, "Ingrese todos los campos", Snackbar.LENGTH_SHORT).show()
             }
             binding.btnLogin.isEnabled = true
         }
@@ -137,10 +107,10 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MenuActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Snackbar.make(binding.txtContraseA, "Usuario o contraseña incorrectas", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.txtPassword, "Usuario o contraseña incorrectas", Snackbar.LENGTH_SHORT).show()
                 }
             } else {
-                Snackbar.make(binding.txtContraseA, "Usuario no existe", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.txtPassword, "Usuario no existe", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

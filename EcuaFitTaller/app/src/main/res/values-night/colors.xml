@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background_ej">#04080B</color>
+    <color name="icono_menu">#525252</color>
+    <color name="search">#222E3A</color>
+    <color name="principal_color_ej">#000000</color>
+    <color name="card_background">#002F2B</color>
+    <color name="title_color_ej">#F7D1D1D1</color>
+    <color name="relleno_menu">#BCBCBC</color>
+    <color name="color_complementario">#B7CAC8</color>
+    <color name="color_boton">#182C31</color>
+    <color name="card_special">#1D7167</color>
+    <color name="comidas_background">#004B45</color>
+    <color name="color_texto_comida">#73CFC9</color>
+
+    <color name="fondo_login">#1B1B1B</color>
+</resources>

@@ -18,7 +18,6 @@
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
-        android:textColor="@color/fondo_login"
         android:text="Información "
      />
 
@@ -62,7 +61,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
 
-        android:textColor="@color/principal_color_ej"
+        android:textColor="@color/color_texto_comida"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"/>
@@ -87,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Porcion"
-                android:textColor="@color/principal_color_ej"
+                android:textColor="@color/color_texto_comida"
                 android:textSize="20sp"
 
                 />
@@ -112,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:text="Calorias"
 
-                android:textColor="@color/principal_color_ej"
+                android:textColor="@color/color_texto_comida"
                 android:textSize="20sp"
 
                 />
@@ -132,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Macronutrientes"
-                android:textColor="@color/principal_color_ej"
+                android:textColor="@color/color_texto_comida"
                 android:textSize="20sp"
 
                 />
@@ -165,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Micronutrientes"
-                android:textColor="@color/principal_color_ej"
+                android:textColor="@color/color_texto_comida"
                 android:textSize="20sp"
 
                 />
@@ -181,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Region"
-                android:textColor="@color/principal_color_ej"
+                android:textColor="@color/color_texto_comida"
                 android:textSize="20sp"
 
                 />

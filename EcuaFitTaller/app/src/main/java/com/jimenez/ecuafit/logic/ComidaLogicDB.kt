@@ -21,7 +21,7 @@ class ComidaLogicDB {
 
         var comidaActual=getAllComidaByFecha(date)
         var comidaName=comidaActual.stream().filter { x->x.nombre==item.nombre }.toList()
-        Log.d("UCE",comidaName.toString())
+
 
         var ComidaData=
             ComidaDB(

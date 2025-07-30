@@ -70,7 +70,6 @@ class DetailsComidasItems : AppCompatActivity() {
             Snackbar.make(binding.btnAddComida,"Comida agregada",Snackbar.LENGTH_SHORT).show()
         }
         binding.cantidadProcion.addTextChangedListener {
-            Log.d("UCE",it.toString())
             if(it.toString().isNotEmpty()){
                 if (item != null) {
                     var count = 0
@@ -79,7 +78,7 @@ class DetailsComidasItems : AppCompatActivity() {
                         this,
                         android.R.layout.simple_list_item_1,
                         item.macronutrientes.stream().map {macItem->
-                            Log.d("UCE",macroNut.toString())
+
                             count++
                             macroNut[count-1] + (macItem.toDouble()*Integer.parseInt(it.toString())).toBigDecimal().setScale(2,RoundingMode.UP).toString() + " gr"
                         }

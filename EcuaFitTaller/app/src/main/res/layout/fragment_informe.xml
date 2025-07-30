@@ -392,7 +392,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="24dp"
         android:clickable="true"
-        app:cardBackgroundColor="@color/card_background"
+        app:layout_goneMarginTop="50dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.525"
@@ -409,7 +409,7 @@
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/color_complementario"
+
                 android:text="Ejercicios"
                 android:textSize="30dp">
 
@@ -425,44 +425,47 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardPeso"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        app:cardBackgroundColor="@color/card_background"
-        android:clickable="true"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardEjercicios">
-
-        <LinearLayout
-            android:id="@+id/peso"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAgua"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="75dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
 
-            <TextView
-                android:id="@+id/pesoText"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/peso"
-                android:textColor="@color/color_complementario"
-                android:textSize="30dp">
-
-            </TextView>
-
-            <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardEjercicios">
+            <LinearLayout
+                android:id="@+id/agua"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:src="@drawable/icono_peso">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            </ImageView>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/aguaText"
+                    android:layout_width="240dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/salud"
+
+                    android:textSize="30dp">
+
+                </TextView>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icono_salud">
+
+                </ImageView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

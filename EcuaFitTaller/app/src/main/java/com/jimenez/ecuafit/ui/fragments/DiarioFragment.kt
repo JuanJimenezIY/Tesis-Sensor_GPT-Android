@@ -38,7 +38,6 @@ class DiarioFragment : Fragment() {
     private lateinit var lmanager: LinearLayoutManager
     private val comidaViewModel by viewModels<ComidaViewModel>()
 
-    //  private lateinit var progressBar:ProgressBar
     private var rvAdapter: ComidaAdapter = ComidaAdapter(::sendComidaItem, ::saveComida)
     private lateinit var searchView: SearchView
 
@@ -72,19 +71,14 @@ class DiarioFragment : Fragment() {
             }
         )
         searchView = binding.searchComida
-        //progressBar = binding.progressBar
-        // Inflate the layout for this fragment
-        binding.agua.setOnClickListener {
-            val intent = Intent(requireContext(), AguaActivity::class.java)
-            startActivity(intent)
 
-        }
+
         return binding.root
     }
 
 
     fun saveComida(item: Comida): Boolean {
-        Log.d("UCE", item.nombre)
+
         var d = lifecycleScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
                 ComidaLogicDB().insertComida(item, 1, Date())
@@ -135,7 +129,7 @@ class DiarioFragment : Fragment() {
             rvAdapter.items = comidaItems
             binding.rvComidas.apply {
                 this.adapter = rvAdapter
-                //  this.layoutManager = lmanager
+
                 this.layoutManager = lmanager
             }
 
